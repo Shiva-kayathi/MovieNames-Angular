@@ -26,13 +26,7 @@ var app = angular.module('app', []);
         return {
           // TODO
           searchMovies: function(keywords){
-            $http.get("http://www.omdbapi.com/?s="+keywords).then(
-              function(response)
-              {
-                console.log(response.data.Search);
-               return response.data.Search;
-              }
-            )
+             return $http.get("http://www.omdbapi.com/?s="+keywords);          
           }
         };
     }];
@@ -54,8 +48,11 @@ app.controller('MovieController', ['$scope','$http', 'OMDbApi',
   function ($scope, $http, OMDbApi)
   {
     // TODO
-    $scope.searchMovieName = function() { 
-      $scope.movies =console.log( OMDbApi.searchMovies($scope.search));
-     }
-     console.log("movies"+ $scope.movies);
+    $scope.searchMovieName = function() {
+      OMDbApi.searchMovies($scope.search).then(  
+        function(response){
+          $scope.movies =  response.data.Search;
+        }
+      );
+    }
 }]);
