@@ -2,15 +2,20 @@
 	<head>
 		<title> Movie Names</title>
 		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-
 		<script type="text/javascript" src="app.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<style>
+		.red {
+			color : green;
+		}
+		</style>
 	</head>
 	<body ng-app="app">
 		<div ng-controller="MovieController">
 		    <h1>Exercise 2 - Movie API</h1>
 		    <input placeholder="Search for a movie..." type="text" ng-model="search" />
 		    <button ng-click = "searchMovieName()">Search </button>
+
 		    <!-- <ul ng-show="movies.length > 0">
 		        Complete here to display the movies 
 		        <li ng-repeat="movie in movies"> <a href="http://www.imdb.com/title/{{movie.imdbID}}"> {{ movie.Title }} </a></li>
@@ -42,7 +47,6 @@
 			        </td>
 		    	</tr>
 		</table>
-
 		    <div ng-show="showError"> There were no movies found with the given Search string</div>
 		</div>
 	</body>
