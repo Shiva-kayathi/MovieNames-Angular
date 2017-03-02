@@ -18,19 +18,20 @@ var app = angular.module('app', []);
  * - Don't hesitate to use console.log() for the received movies to see how is formated the JSON
  *   and the different movies attributes that you can use.
  */
-  app.provider('OMDbApi', function OMDbApiProvider() {
-    var endpoint = 'http://www.omdbapi.com/';
-    var baseIMDbUrl = 'http://www.imdb.com/title/';
-    var searchByMovieName = '?s=';
-    this.$get = ['$http', function OMDbApiFactory($http) {
-        return {
-          // TODO
-          searchMovies: function(keywords){
-             return $http.get("http://www.omdbapi.com/?s="+keywords);          
-          }
-        };
-    }];
-  });
+app.provider('OMDbApi', function OMDbApiProvider() {
+  var endpoint = 'http://www.omdbapi.com/';
+  var baseIMDbUrl = 'http://www.imdb.com/title/';
+  var searchByMovieName = '?s=';
+  
+  this.$get = ['$http', function OMDbApiFactory($http) {
+      return {
+        // TODO
+        searchMovies: function(keywords){
+           return $http.get("http://www.omdbapi.com/?s="+keywords);          
+        }
+      };
+  }];
+});
 
 /**
  * Movie Controller
@@ -59,7 +60,6 @@ app.controller('MovieController', ['$scope','$http', 'OMDbApi',
             console.log($scope.movies);
           }else{
             $scope.showError = true;
-            $scope.movies = {}; 
           }
           
         }

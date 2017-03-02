@@ -30,8 +30,7 @@
 						</td>
 					</tr>
 				</thead>
-			</tr>
-			<tr ng-repeat="movie in movies | orderBy: 'movie.Year': sortReverse | filter: searchByMovieName" >
+				<tr ng-repeat="movie in movies | orderBy: 'movie.Year': sortReverse | filter: searchByMovieName" >
 		        <!-- Complete here to display the movies -->
 			        <td> 
 			        	<a href="http://www.imdb.com/title/{{movie.imdbID}}" ng-class="{red: movie.Type=='series'}"> 
@@ -42,7 +41,8 @@
 			        	{{ movie.Year}}
 			        </td>
 		    	</tr>
-		    </table>
+		</table>
+
 		    <div ng-show="showError"> There were no movies found with the given Search string</div>
 		</div>
 	</body>
