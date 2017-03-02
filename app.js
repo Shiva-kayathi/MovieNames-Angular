@@ -47,6 +47,7 @@ var app = angular.module('app', []);
 app.controller('MovieController', ['$scope','$http', 'OMDbApi',
   function ($scope, $http, OMDbApi)
   {
+    $scope.sortReverse = false;
     // TODO
     $scope.searchMovieName = function() {
       OMDbApi.searchMovies($scope.search).then(  
@@ -55,6 +56,7 @@ app.controller('MovieController', ['$scope','$http', 'OMDbApi',
           if(response.data.Response === "True"){
             $scope.movies =  response.data.Search;
             $scope.showError = false;
+            console.log($scope.movies);
           }else{
             $scope.showError = true;
             $scope.movies = {}; 
