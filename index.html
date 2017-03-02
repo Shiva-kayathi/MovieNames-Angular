@@ -5,15 +5,25 @@
 
 		<script type="text/javascript" src="app.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	</head>
 	<body ng-app="app">
 		<div ng-controller="MovieController">
 		    <h1>Exercise 2 - Movie API</h1>
 		    <input placeholder="Search for a movie..." type="text" ng-model="search" />
 		    <button ng-click = "searchMovieName()">Search </button>
+		    <label ng-click = "sortReverse = !sortReverse"> Year Sort </label>
+		    <span ng-show="!sortReverse" class="fa fa-caret-down"></span>
+		    <span ng-show="sortReverse" class="fa fa-caret-up"></span>
+		    
 		    <ul ng-show="movies.length > 0">
 		        <!-- Complete here to display the movies -->
-		        <li ng-repeat="movie in movies"> <a href="http://www.imdb.com/title/{{movie.imdbID}}"> {{ movie.Title }} </a></li>
+		        <li ng-repeat="movie in movies | orderBy: 'Year':sortReverse"> 
+		        	<a href="http://www.imdb.com/title/{{movie.imdbID}}"> 
+		        		{{ movie.Title }} 
+		        	</a> 
+		        	: {{ movie.Year}}
+		        </li>
 		    </ul>
 		    <div ng-show="showError"> There were no movies found with the given Search string</div>
 		</div>

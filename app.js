@@ -52,6 +52,7 @@ app.controller('MovieController', ['$scope','$http',
                 $scope.showError = true;
               } else {
                 $scope.movies = response.data.Search;
+                console.log($scope.movies);
               }		
             }
           )
