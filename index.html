@@ -2,7 +2,6 @@
 	<head>
 		<title> Movie Names</title>
 		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-
 		<script type="text/javascript" src="app.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -12,18 +11,33 @@
 		    <h1>Exercise 2 - Movie API</h1>
 		    <input placeholder="Search for a movie..." type="text" ng-model="search" />
 		    <button ng-click = "searchMovieName()">Search </button>
-		    <label ng-click = "sortReverse = !sortReverse"> Year Sort </label>
-		    <span ng-show="!sortReverse" class="fa fa-caret-down"></span>
-		    <span ng-show="sortReverse" class="fa fa-caret-up"></span>
 		    
-		    <ul ng-show="movies.length > 0">
+		    <table ng-show="movies.length > 0">
+				<thead>
+					<tr>
+						<td>
+							Name
+							<input type="text" ng-model="searchMovieName" />
+						</td>
+						<td>
+							<a href="#" ng-click="sortType = 'model'; sortReverse = !sortReverse">
+								Year
+								<span ng-show="!sortReverse" class="fa fa-caret-down"></span>
+        						<span ng-show="sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</td>
+					</tr>
+					<tr ng-repeat="movie in movies | orderBy: 'Year': sortReverse | filter: searchMovieName" >
+
 		        <!-- Complete here to display the movies -->
-		        <li ng-repeat="movie in movies | orderBy: 'Year':sortReverse"> 
-		        	<a href="http://www.imdb.com/title/{{movie.imdbID}}"> 
+		        <td> 
+		        	<a href="http://www.imdb.com/title/{{movie.imdbID}}" ng-class="{red: movie.Type=='series'}"> 
 		        		{{ movie.Title }} 
 		        	</a> 
-		        	: {{ movie.Year}}
-		        </li>
+		        </td>
+		        <td>
+		        	{{ movie.Year}}
+		        </td>
 		    </ul>
 		    <div ng-show="showError"> There were no movies found with the given Search string</div>
 		</div>
