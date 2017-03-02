@@ -18,7 +18,7 @@ var app = angular.module('app', []);
  * - Don't hesitate to use console.log() for the received movies to see how is formated the JSON
  *   and the different movies attributes that you can use.
  */
-/* app.provider('OMDbApi', function OMDbApiProvider() {
+app.provider('OMDbApi', function OMDbApiProvider() {
     var endpoint = 'http://www.omdbapi.com/';
     var baseIMDbUrl = 'http://www.imdb.com/title/';
     
@@ -28,7 +28,7 @@ var app = angular.module('app', []);
         };
     }];
 });
-*/
+
 /**
  * Movie Controller
  *
@@ -42,15 +42,19 @@ var app = angular.module('app', []);
  * - Display movies with a different color than series
  */
 app.controller('MovieController', ['$scope','$http',
-function ($scope, $http) {
-    // TODO
-   $scope.searchMovieName = function() {
-   	console.log("http://www.omdbapi.com/?t="+ $scope.search);
-        $http.get("http://www.omdbapi.com/?s="+ $scope.search).then(
-          function(response){
-						$scope.movies = response.data.Search;
-						console.log($scope.movies);
-          }
-        )
-    };
-}]);
+  function ($scope, $http) {
+      // TODO
+     $scope.searchMovieName = function() { 
+          $http.get("http://www.omdbapi.com/?s="+ $scope.search).then(
+            function(response)
+            {          
+              if(!response.data.Search) {
+                $scope.showError = true;
+              } else {
+                $scope.movies = response.data.Search;
+              }		
+            }
+          )
+      };
+  }
+]);
