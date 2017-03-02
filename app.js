@@ -51,7 +51,15 @@ app.controller('MovieController', ['$scope','$http', 'OMDbApi',
     $scope.searchMovieName = function() {
       OMDbApi.searchMovies($scope.search).then(  
         function(response){
-          $scope.movies =  response.data.Search;
+          debugger;
+          if(response.data.Response === "True"){
+            $scope.movies =  response.data.Search;
+            $scope.showError = false;
+          }else{
+            $scope.showError = true;
+            $scope.movies = {}; 
+          }
+          
         }
       );
     }
