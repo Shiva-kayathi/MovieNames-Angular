@@ -18,17 +18,26 @@ var app = angular.module('app', []);
  * - Don't hesitate to use console.log() for the received movies to see how is formated the JSON
  *   and the different movies attributes that you can use.
  */
-/* app.provider('OMDbApi', function OMDbApiProvider() {
+  app.provider('OMDbApi', function OMDbApiProvider() {
     var endpoint = 'http://www.omdbapi.com/';
     var baseIMDbUrl = 'http://www.imdb.com/title/';
-    
-    this.$get = [function OMDbApiFactory() {
+    var searchByMovieName = '?s=';
+    this.$get = ['$http', function OMDbApiFactory($http) {
         return {
-            // TODO
+          // TODO
+          searchMovies: function(keywords){
+            $http.get("http://www.omdbapi.com/?s="+keywords).then(
+              function(response)
+              {
+                console.log(response.data.Search);
+               return response.data.Search;
+              }
+            )
+          }
         };
     }];
-});
-*/
+  });
+
 /**
  * Movie Controller
  *
@@ -41,16 +50,12 @@ var app = angular.module('app', []);
  * - Allow to be able to sort the movies by release date (and change the sorting by a button)
  * - Display movies with a different color than series
  */
-app.controller('MovieController', ['$scope','$http',
-function ($scope, $http) {
+app.controller('MovieController', ['$scope','$http', 'OMDbApi',
+  function ($scope, $http, OMDbApi)
+  {
     // TODO
-   $scope.searchMovieName = function() {
-   	console.log("http://www.omdbapi.com/?t="+ $scope.search);
-        $http.get("http://www.omdbapi.com/?s="+ $scope.search).then(
-          function(response){
-						$scope.movies = response.data.Search;
-						console.log($scope.movies);
-          }
-        )
-    };
+    $scope.searchMovieName = function() { 
+      $scope.movies =console.log( OMDbApi.searchMovies($scope.search));
+     }
+     console.log("movies"+ $scope.movies);
 }]);
