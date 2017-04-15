@@ -12,15 +12,11 @@
 	</head>
 	<body ng-app="app">
 		<div ng-controller="MovieController">
-		    <h1>Exercise 2 - Movie API</h1>
+		    <h1> Movie API</h1>
 		    <input placeholder="Search for a movie..." type="text" ng-model="search" />
-		    <button ng-click = "searchMovieName()">Search </button>
+			<button ng-click = "searchMovieName()">Search </button>
 
-		    <!-- <ul ng-show="movies.length > 0">
-		        Complete here to display the movies 
-		        <li ng-repeat="movie in movies"> <a href="http://www.imdb.com/title/{{movie.imdbID}}"> {{ movie.Title }} </a></li>
-		    </ul> -->
-		    <table ng-show="movies.length > 0"> 
+	    	<table ng-show="movies.length > 0"> 		    	
 		    	<thead>
 					<tr>
 						<td>
@@ -36,7 +32,6 @@
 					</tr>
 				</thead>
 				<tr ng-repeat="movie in movies | orderBy: 'movie.Year': sortReverse | filter: searchByMovieName" >
-		        <!-- Complete here to display the movies -->
 			        <td> 
 			        	<a href="http://www.imdb.com/title/{{movie.imdbID}}" ng-class="{red: movie.Type=='series'}"> 
 			        		{{ movie.Title }} 
